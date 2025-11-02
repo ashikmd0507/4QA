@@ -198,7 +198,6 @@
 <div class="wrap">
   <header>
     <h1>❤️ My Questions for N ❤️</h1>
-    <br>
   </header>
 
   <form id="loveForm" autocomplete="off">
@@ -233,7 +232,7 @@
   <div class="thanks-card" role="dialog" aria-live="polite">
     <h2>💖 Thank you 💖</h2>
     <p>Your answers means the </p>
-    <p>🌍 world to me 🌍</p>
+    <p>🌍 world to me 🌍 </p>
   </div>
 </div>
 
@@ -259,29 +258,25 @@
     const data = new FormData(form);
 
     try {
-      await fetch('https://formspree.io/f/mblpwdpd', {
+      await fetch('https://formspree.io/f/YOUR_FORMSPREE_ID', {
         method: 'POST',
         body: data,
         headers: { 'Accept': 'application/json' }
       });
 
-   // Hide the title
-document.querySelector(".title").style.display = "none";
+      // show centered overlay thank you
+      const overlay = document.getElementById('thanksOverlay');
+      overlay.style.display = 'flex';
+      overlay.setAttribute('aria-hidden', 'false');
 
-// Show only centered overlay thank you animation
-const overlay = document.getElementById('thanksOverlay');
-overlay.style.display = 'flex';
-overlay.setAttribute('aria-hidden', 'false');
+      // optionally clear inputs (keeps them private on device)
+      form.querySelectorAll('textarea').forEach(t => t.value = '');
 
-// Clear inputs (optional)
-form.querySelectorAll('textarea').forEach(t => t.value = '');
-
-// Hide the entire form
-form.style.display = 'none';
-
+      // hide the form (keeps space behind for overlay)
+      form.style.display = 'none';
     } catch (err) {
       console.error(err);
-      alert('Something went wrong, please try again.');
+      alert('Something went wrong, please try again or inform me, so that I can re-create my website.');
     }
   });
 </script>
