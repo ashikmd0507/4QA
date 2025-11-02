@@ -1,173 +1,178 @@
 <!DOCTYPE html>
-<html lang="ta">
+<html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>For You ❤️</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&display=swap" rel="stylesheet">
 
 <style>
-*{
-  margin:0; padding:0;
-  font-family:'Montserrat', sans-serif;
-  box-sizing:border-box;
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Montserrat', sans-serif;
+  background: linear-gradient(135deg, #ff477e, #ff1e56);
+  color: #fff;
+  text-align: center;
+  overflow-x: hidden;
 }
 
-body{
-  background:linear-gradient(135deg, #ff3e6c , #ff1d52);
-  min-height:100vh;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  padding:20px;
-  position:relative;
-  overflow:hidden;
-  color:#fff;
+.container {
+  padding: 20px;
+  max-width: 400px;
+  margin: auto;
+  animation: fadeIn 1.6s ease;
 }
 
-/* Heart rain */
-.heart {
-  position: fixed;
-  top: -10px;
+h1 {
+  font-size: 28px;
+  margin-bottom: 5px;
+  font-weight: 700;
+  animation: floatText 3s infinite ease-in-out;
+}
+
+.sub {
+  margin-bottom: 25px;
+  font-size: 18px;
+}
+
+.question-box {
+  background: rgba(255, 255, 255, 0.15);
+  padding: 14px;
+  margin-bottom: 20px;
+  border-radius: 14px;
+  backdrop-filter: blur(8px);
+  animation: pop 0.6s ease;
+}
+
+.question-text {
+  font-size: 14px;
+  font-weight: 600;
+  text-align: left;
+  margin-bottom: 8px;
+  color: #fff;
+}
+
+textarea {
+  width: 100%;
+  padding: 10px;
+  border: none;
+  outline: none;
+  border-radius: 8px;
+  font-size: 14px;
+  resize: none;
+  background: rgba(255,255,255,0.9);
+  animation: pulseInput 2s infinite;
+}
+
+button {
+  width: 100%;
+  padding: 14px;
+  background: #fff;
+  color: #ff1e56;
+  border: none;
+  border-radius: 10px;
+  font-size: 18px;
+  font-weight: 700;
+  margin-top: 10px;
+  cursor: pointer;
+  animation: heartBeat 2s infinite;
+}
+
+button:hover {
+  transform: scale(1.05);
+}
+
+.success-msg {
+  display: none;
   font-size: 20px;
-  animation: fall linear infinite;
-  opacity: 0.9;
-}
-@keyframes fall {
-  to { transform: translateY(110vh) rotate(360deg); }
+  margin-top: 20px;
+  animation: fadePop 1.2s ease forwards;
 }
 
-/* Form container */
-.container{
-  width:100%;
-  max-width:420px;
-  background:rgba(255,255,255,0.15);
-  padding:20px;
-  border-radius:18px;
-  backdrop-filter: blur(12px);
-  box-shadow:0 0 20px rgba(255,255,255,0.3);
-  animation: fadeIn 1.2s ease;
+/* Animations */
+@keyframes floatText {
+  0%,100% {transform: translateY(0);}
+  50% {transform: translateY(-5px);}
 }
 
-@keyframes fadeIn{
-  from{opacity:0;transform:scale(.95);}
-  to{opacity:1;transform:scale(1);}
+@keyframes pulseInput {
+  0%,100% {box-shadow: 0 0 0 rgba(255,255,255,0);}
+  50% {box-shadow: 0 0 12px rgba(255,255,255,0.7);}
 }
 
-/* Input box with question */
-.block{
-  margin-bottom:18px;
-}
-textarea, input{
-  width:100%;
-  padding:12px;
-  border-radius:12px;
-  border:2px solid #fff;
-  background:rgba(255,255,255,0.2);
-  color:#fff;
-  font-size:15px;
-  resize:none;
-  transition:0.3s;
-  min-height:82px;
-}
-textarea:focus, input:focus{
-  background:rgba(255,255,255,0.35);
-  transform:scale(1.02);
-  outline:none;
+@keyframes heartBeat {
+  0%,100% {transform: scale(1);}
+  50% {transform: scale(1.07);}
 }
 
-/* Button */
-button{
-  width:100%;
-  background:#fff;
-  color:#ff1d52;
-  padding:12px;
-  font-size:18px;
-  border:none;
-  border-radius:10px;
-  cursor:pointer;
-  font-weight:700;
-  transition:0.2s;
+@keyframes fadeIn {
+  from{opacity:0; transform: translateY(20px);}
+  to{opacity:1; transform: translateY(0);}
 }
 
-button:hover{
-  transform:scale(1.03);
+@keyframes fadePop {
+  0% {opacity:0; transform: scale(0.8);}
+  100% {opacity:1; transform: scale(1);}
 }
 
-/* Custom Thank you screen */
-.thankyou{
-  display:none;
-  text-align:center;
-  font-size:24px;
-  font-weight:700;
-  animation: zoomIn 1s ease forwards;
-}
-
-@keyframes zoomIn{
-  from{opacity:0; transform: scale(0.6);}
-  to{opacity:1; transform: scale(1);}
+@keyframes pop {
+  from{transform: scale(0.9); opacity:0;}
+  to{transform: scale(1); opacity:1;}
 }
 </style>
 </head>
 
 <body>
 
-<div class="container" id="formBox">
-  <form id="loveForm" action="https://formspree.io/f/yourFormID" method="POST">
+<div class="container">
+  <h1>❤️ For You ❤️</h1>
+  <div class="sub">Answer honestly 🙏</div>
 
-    <div class="block">
-      <textarea name="Q1" required>Q.NO 1:  Yen mela Ungaluku Kovama? Yenmela ethum thappu iruntha enna manuchirunga🙏</textarea>
+  <form id="loveForm" action="https://formspree.io/f/your-id-here" method="POST">
+
+    <div class="question-box">
+      <div class="question-text">Q.NO 1: Yen mela Ungaluku Kovama? Yenmela ethum thappu iruntha enna manuchirunga🙏</div>
+      <textarea name="Q1 Answer" rows="2" required></textarea>
     </div>
 
-    <div class="block">
-      <textarea name="Q2" required>✨என் குறுஞ்செய்திகளுக்கு மட்டும் தயவுசெய்து அன்பு காட்டு🙏, பாவம் அவைகள், உன் முகவரி மட்டுமே, அறிந்தவைகள்💯🙌</textarea>
+    <div class="question-box">
+      <div class="question-text">Q.NO 2: ✨என் குறுஞ்செய்திகளுக்கு மட்டும் தயவுசெய்து அன்பு காட்டு🙏, பாவம் அவைகள், உன் முகவரி மட்டுமே, அறிந்தவைகள்💯🙌</div>
+      <textarea name="Q2 Answer" rows="2" required></textarea>
     </div>
 
-    <div class="block">
-      <textarea name="Q3" required>Q.NO 3: நான் யார் என்று உங்களுக்கு தெரியுமா?</textarea>
+    <div class="question-box">
+      <div class="question-text">Q.NO 3: நான் யார் என்று உங்களுக்கு தெரியுமா?</div>
+      <textarea name="Q3 Answer" rows="2" required></textarea>
     </div>
 
-    <div class="block">
-      <textarea name="Q4" required>Q.NO 4: Ennoda Birthday vara poguthu. Neenga thappa ninaichikalana, Chocolate 🍫 tharalama ungaluku??</textarea>
+    <div class="question-box">
+      <div class="question-text">Q.NO 4: Ennoda Birthday vara poguthu. Neenga thappa ninaichikalana, Chocolate 🍫 tharalama ungaluku??</div>
+      <textarea name="Q4 Answer" rows="2" required></textarea>
     </div>
 
     <button type="submit">Send ❤️</button>
   </form>
-</div>
 
-<div class="thankyou" id="thankBox">
-  ❤️ Thank You So Much ❤️  
-  <br><br>
-  N loves you forever 💖
+  <div class="success-msg" id="successMsg">
+    💕 Thank You! Your answers mean a lot to me ❤️  
+  </div>
 </div>
 
 <script>
-// Heart rain
-function createHeart(){
-  const heart = document.createElement("div");
-  heart.classList.add("heart");
-  heart.innerHTML = "❤️";
-  heart.style.left = Math.random()*100 + "vw";
-  heart.style.animationDuration = (3 + Math.random()*3) + "s";
-  document.body.appendChild(heart);
-  setTimeout(()=>heart.remove(),6000);
-}
-setInterval(createHeart,120);
-
-// Form submit custom animation
-document.getElementById("loveForm").addEventListener("submit", function(e){
+document.getElementById("loveForm").addEventListener("submit", function (e) {
   e.preventDefault();
-  let form = this;
+  
+  const form = e.target;
+  const data = new FormData(form);
 
-  fetch(form.action, {
-    method: "POST",
-    body: new FormData(form)
-  })
-  .then(()=>{
-    document.getElementById("formBox").style.display="none";
-    document.getElementById("thankBox").style.display="block";
-  });
+  fetch(form.action, { method: "POST", body: data })
+    .then(() => {
+      form.style.display = "none";
+      document.getElementById("successMsg").style.display = "block";
+    })
+    .catch(() => alert("Error! Try again"));
 });
 </script>
 
