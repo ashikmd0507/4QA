@@ -12,101 +12,112 @@ body{
   margin:0;
   padding:0;
   font-family:'Montserrat',sans-serif;
-  background:linear-gradient(145deg,#ff002e,#ff3c68,#e60026);
-  height:100vh;
+  background:linear-gradient(145deg,#ff002e,#ff3d65,#e60026);
   display:flex;
-  flex-direction:column;
+  justify-content:center;
   align-items:center;
-  overflow-x:hidden;
+  min-height:100vh;
   color:white;
+  text-align:center;
+  overflow:hidden;
 }
+
 .container{
   width:92%;
-  max-width:520px;
-  text-align:center;
-  padding-top:15px;
+  max-width:500px;
 }
+
 h2{
+  font-size:27px;
   font-weight:900;
-  font-size:28px;
-  margin-bottom:10px;
   animation:glow 2s infinite alternate;
+  margin-bottom:18px;
 }
-@keyframes glow{ 
-  from{ text-shadow:0 0 8px #fff; }
-  to{ text-shadow:0 0 18px #ffbfd6,0 0 40px #ff99af; }
+@keyframes glow{
+  0%{text-shadow:0 0 10px #fff;}
+  100%{text-shadow:0 0 30px #ffb7c9;}
 }
-label{
-  display:block;
-  font-weight:700;
-  font-size:15px;
-  text-align:left;
-  margin:10px 5px 6px 5px;
-}
-textarea{
-  width:100%;
+
+.box{
+  background:rgba(255,255,255,0.18);
+  backdrop-filter:blur(8px);
   padding:14px;
   border-radius:15px;
-  border:none;
-  outline:none;
-  resize:none;
-  min-height:70px;
-  font-size:14px;
-  color:white;
-  font-weight:500;
-  background:rgba(255,255,255,0.15);
-  backdrop-filter:blur(8px);
+  box-shadow:0 0 20px rgba(255,255,255,.4);
+  margin-bottom:12px;
+  animation:slideUp .8s ease forwards, pulseBox 3s infinite alternate;
   opacity:0;
-  animation:slideUp .7s ease forwards, pulseBox 3s ease-in-out infinite alternate;
 }
 @keyframes slideUp{
   from{opacity:0;transform:translateY(25px) scale(.95);}
   to{opacity:1;transform:translateY(0) scale(1);}
 }
 @keyframes pulseBox{
-  0%{box-shadow:0 0 10px rgba(255,255,255,0.4);}
-  100%{box-shadow:0 0 20px rgba(255,255,255,0.9);}
+  0%{box-shadow:0 0 8px rgba(255,255,255,0.3);}
+  100%{box-shadow:0 0 20px rgba(255,255,255,0.8);}
 }
+
+.question{
+  font-size:14px;
+  font-weight:700;
+  margin-bottom:6px;
+  text-align:left;
+  white-space:pre-line;
+}
+
+.answer{
+  width:100%;
+  border:none;
+  outline:none;
+  padding:8px;
+  font-size:14px;
+  background:rgba(255,255,255,0.12);
+  color:white;
+  border-radius:10px;
+  resize:none;
+  height:70px;
+}
+
 button{
   width:100%;
   background:white;
-  color:#d1002f;
+  color:#c3002d;
   border:none;
   padding:13px;
-  font-weight:900;
   font-size:16px;
+  font-weight:900;
   border-radius:30px;
-  margin-top:12px;
   cursor:pointer;
-  transition:.25s;
+  margin-top:10px;
 }
 button:hover{
   transform:scale(1.06);
   box-shadow:0 0 18px white;
 }
-.heart{
-  position:fixed;
-  color:white;
-  font-size:18px;
-  animation:floatUp 6s infinite linear;
-  bottom:-10px;
-  opacity:.9;
-}
-@keyframes floatUp{
-  0%{transform:translateY(0) rotate(0);opacity:1;}
-  100%{transform:translateY(-110vh) rotate(360deg);opacity:0;}
-}
+
 .thanks{
   display:none;
   font-size:20px;
-  font-weight:700;
-  margin-top:20px;
-  animation:fadeIn .8s ease forwards;
-  text-shadow:0 0 12px #fff;
+  font-weight:800;
+  margin-top:18px;
+  animation:fadeIn .8s ease;
 }
 @keyframes fadeIn{
-  from{opacity:0;transform:scale(.7);}
-  to{opacity:1;transform:scale(1);}
+  0%{opacity:0;transform:scale(.7);}
+  100%{opacity:1;transform:scale(1);}
+}
+
+/* floating hearts */
+.heart{
+  position:fixed;
+  bottom:-10px;
+  animation:floating 6s linear infinite;
+  color:white;
+  opacity:.9;
+}
+@keyframes floating{
+  from{transform:translateY(0) rotate(0);}
+  to{transform:translateY(-110vh) rotate(360deg);}
 }
 </style>
 </head>
@@ -118,54 +129,56 @@ button:hover{
 
 <form id="loveForm">
 
-<label>Q.NO 1: Yen mela Ungaluku Kovama? Yenmela ethum thappu iruntha enna manuchirunga🙏</label>
-<textarea name="q1" required></textarea>
+<div class="box">
+  <div class="question">Q.NO 1: Yen mela Ungaluku Kovama? Yenmela ethum thappu iruntha enna manuchirunga🙏</div>
+  <textarea class="answer" name="q1" required></textarea>
+</div>
 
-<label style="white-space:pre-line;">
-Q.No 2: ✨என் குறுஞ்செய்திகளுக்கு மட்டும் தயவுசெய்து 
-அன்பு காட்டு🙏, 
-பாவம் அவைகள், 
-உன் முகவரி மட்டுமே, 
-அறிந்தவைகள்💯🙌
-</label>
-<textarea name="q2" required></textarea>
+<div class="box">
+  <div class="question">Q.No 2: ✨என் குறுஞ்செய்தைகளுக்கு மட்டும் தயவுசெய்து அன்பு காட்டு🙏, பாவம் அவைகள், உன் முகவரி மட்டுமே, அறிந்தவைகள்💯🙌</div>
+  <textarea class="answer" name="q2" required></textarea>
+</div>
 
-<label>Q.NO 3: நான் யார் என்று உங்களுக்கு தெரியுமா?</label>
-<textarea name="q3" required></textarea>
+<div class="box">
+  <div class="question">Q.NO 3: நான் யார் என்று உங்களுக்கு தெரியுமா?</div>
+  <textarea class="answer" name="q3" required></textarea>
+</div>
 
-<label>Q.NO 4: Ennoda Birthday vara poguthu. Neenga thappa ninaichikalana, Chocolate 🍫 tharalama ungaluku??</label>
-<textarea name="q4" required></textarea>
+<div class="box">
+  <div class="question">Q.NO 4: Ennoda Birthday vara poguthu. Neenga thappa ninaichikalana, Chocolate 🍫 tharalama ungaluku??</div>
+  <textarea class="answer" name="q4" required></textarea>
+</div>
 
 <button type="submit">Send ❤️</button>
 </form>
 
-<div class="thanks">💖 Thank you... Your answers mean so much to me 💖</div>
+<div class="thanks">💖 Thank you... your answers mean so much to me 💖</div>
 </div>
 
 <script>
-// Floating hearts
+// hearts
 setInterval(()=>{
  let h=document.createElement("div");
  h.innerHTML="❤️";
  h.className="heart";
  h.style.left=Math.random()*100+"vw";
- h.style.fontSize=(Math.random()*18+16)+"px";
+ h.style.fontSize=(Math.random()*18+18)+"px";
  document.body.appendChild(h);
  setTimeout(()=>h.remove(),5000);
 },350);
 
-// AJAX submit
+// submit
 document.getElementById("loveForm").addEventListener("submit",async(e)=>{
  e.preventDefault();
- const data=new FormData(e.target);
+ let data=new FormData(e.target);
  await fetch("https://formspree.io/f/YOUR_FORMSPREE_ID",{
-  method:"POST",
-  body:data,
-  headers:{ "Accept":"application/json" }
+   method:"POST",
+   body:data,
+   headers:{ "Accept":"application/json" }
  });
 
-e.target.style.display="none";
-document.querySelector(".thanks").style.display="block";
+ e.target.style.display="none";
+ document.querySelector(".thanks").style.display="block";
 });
 </script>
 
