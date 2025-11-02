@@ -1,179 +1,175 @@
 <!DOCTYPE html>
 <html lang="ta">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>For You 💗</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>N 💗</title>
 
 <style>
-body{
-  margin:0;
-  font-family: "Poppins", sans-serif;
-  background: linear-gradient(120deg,#ff2975,#ff4f8b,#ff77a9);
-  color:white;
-  height:100vh;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  justify-content:flex-start;
-  overflow:hidden;
-  text-align:center;
-}
+  body {
+    margin: 0;
+    font-family: "Poppins", sans-serif;
+    background: linear-gradient(135deg,#ff2c73,#ff5993,#ff1e6a);
+    height: 100vh;
+    overflow-x: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    text-align: center;
+    padding: 10px;
+  }
 
-h1{
-  font-size:22px;
-  font-weight:700;
-  animation: fadeIn 2s ease forwards;
-  margin-top:15px;
-  padding:0 10px;
-}
+  .intro {
+    font-size: 20px;
+    font-weight: 700;
+    max-width: 85%;
+    line-height: 1.6;
+    animation: glow 5s ease-in-out infinite alternate;
+  }
 
-.center-letter {
-  font-size:80px;
-  font-weight:900;
-  margin:10px 0;
-  animation: heartbeat 2s infinite;
-}
+  .center-letter {
+    font-size: 70px;
+    font-weight: 900;
+    margin: 12px 0;
+    animation: beat 2s infinite ease-in-out;
+  }
 
-@keyframes heartbeat {
-  0%{ transform: scale(1); text-shadow:0 0 10px #fff;}
-  50%{ transform: scale(1.25); text-shadow:0 0 30px #fff;}
-  100%{ transform: scale(1); text-shadow:0 0 10px #fff;}
-}
+  @keyframes beat {
+    0% { transform: scale(1); text-shadow: 0 0 12px #fff; }
+    100% { transform: scale(1.12); text-shadow: 0 0 30px #fff; }
+  }
 
-.typing-love{
-  font-size:18px;
-  font-weight:600;
-  width:90%;
-  margin-bottom:8px;
-  white-space:nowrap;
-  overflow:hidden;
-  border-right:2px solid #fff;
-  animation: typing 4s steps(40,end), blink .7s infinite;
-}
+  @keyframes glow {
+    0% { opacity: .8; }
+    100% { opacity: 1; text-shadow: 0 0 15px #fff,0 0 30px #ffe1f0; }
+  }
 
-@keyframes typing{ from{width:0;} }
-@keyframes blink{ 50%{border-color:transparent;} }
+  form {
+    width: 100%;
+    max-width: 460px;
+    margin-top: 12px;
+  }
 
-form{
-  width:90%;
-  max-width:500px;
-  margin-top:10px;
-}
+  textarea {
+    width: 100%;
+    padding: 13px;
+    border-radius: 12px;
+    border: none;
+    margin-bottom: 10px;
+    outline: none;
+    font-size: 15px;
+    resize: none;
+  }
 
-textarea{
-  width:100%;
-  padding:15px;
-  border:none;
-  border-radius:12px;
-  margin:8px 0;
-  font-size:14px;
-  outline:none;
-}
+  button {
+    width: 100%;
+    background: #fff;
+    border: none;
+    color: #ff2f7a;
+    font-weight: bold;
+    padding: 13px;
+    border-radius: 30px;
+    font-size: 17px;
+    margin-top: 5px;
+    cursor: pointer;
+    transition: .3s;
+  }
+  button:active {
+    transform: scale(.96);
+  }
 
-button{
-  width:100%;
-  background:white;
-  border:none;
-  color:#ff2f77;
-  font-size:16px;
-  font-weight:bold;
-  padding:12px;
-  border-radius:25px;
-  margin-top:8px;
-  cursor:pointer;
-}
+  .success-box {
+    display: none;
+    font-size: 22px;
+    margin-top: 15px;
+    animation: fadeIn .9s ease forwards;
+  }
 
-.success-box {
-  display:none;
-  animation:fadeIn 1s ease forwards;
-  font-size:20px;
-}
+  @keyframes fadeIn {
+    from { opacity: 0; transform: scale(.7); }
+    to { opacity: 1; transform: scale(1); }
+  }
 
-@keyframes fadeIn {
-  from{opacity:0; transform:scale(.5);}
-  to{opacity:1; transform:scale(1);}
-}
-
-/* floating rose petals */
-.petal{
-  position:fixed;
-  top:-10px;
-  font-size:22px;
-  animation: fall 6s infinite linear;
-  opacity:.85;
-}
-@keyframes fall{
-  0%{transform:translateY(0) rotate(0);}
-  100%{transform:translateY(110vh) rotate(360deg);}
-}
+  /* Floating hearts */
+  .heart {
+    position: fixed;
+    bottom: -10px;
+    animation: rise 6s infinite ease-in;
+    opacity: .8;
+  }
+  @keyframes rise {
+    0% { transform: translateY(0) scale(.6) rotate(0deg); opacity: 1; }
+    100% { transform: translateY(-120vh) scale(1.2) rotate(360deg); opacity: 0; }
+  }
 </style>
 </head>
 
 <body>
 
 <audio autoplay loop>
-<source src="https://cdn.pixabay.com/download/audio/2022/03/10/audio_32295c9c91.mp3?filename=romantic-piano-ambient-110416.mp3" type="audio/mpeg">
+  <source src="https://cdn.pixabay.com/audio/2023/02/14/audio_7f78e5a4cd.mp3" type="audio/mpeg">
 </audio>
 
-<!-- Top Line -->
-<div class="typing-love">
-நான் அதிக அக்கறை கொண்ட ஒரே பெண் நீ தான் 💗
-</div>
+<!-- Top sentence -->
+<div class="intro">நான் அதிக அக்கறை கொண்ட, ஒரே பெண் நீ மட்டும் தான்!</div>
 
-<!-- Center Letter -->
-<div class="center-letter">N</div>
+<!-- Center N heart -->
+<div class="center-letter">N 💗</div>
 
-<!-- Bottom Line -->
-<h1>நினைப்பதற்கே அழகானவள் நீ தான் 💞</h1>
+<!-- Bottom sentence -->
+<div class="intro">நினைப்பதற்கே அழகானவள் நீ தான் ❤️</div>
 
 <form id="loveForm">
 
-<textarea name="q1" required placeholder="Q.NO 1:  Yen mela Ungaluku Kovama? Yenmela ethum thappu iruntha enna manuchirunga🙏"></textarea>
+<textarea name="q1" placeholder="Q.NO 1:  Yen mela Ungaluku Kovama? Yenmela ethum thappu iruntha enna manuchirunga🙏" required></textarea>
 
-<textarea name="q2" required placeholder="Q.No 2: ✨என் குறுஞ்செய்திகளுக்கு மட்டும் தயவுசெய்து அன்பு காட்டு🙏, பாவம் அவைகள் உன் முகவரி மட்டுமே அறிந்தவைகள்💯🙌"></textarea>
+<textarea name="q2" placeholder="Q.No 2: 
 
-<textarea name="q3" required placeholder="Q.NO 3: நான் யார் என்று உங்களுக்கு தெரியுமா?"></textarea>
+✨என் குறுஞ்செய்திகளுக்கு மட்டும் தயவுசெய்து
+அன்பு காட்டு🙏,
+பாவம் அவைகள்
+உன் முகவரி மட்டுமே
+அறிந்தவைகள்💯🙌" required></textarea>
 
-<textarea name="q4" required placeholder="Q.NO 4: Ennoda Birthday vara poguthu. Neenga thappa ninaichikalana, Chocolate 🍫 tharalama ungaluku??"></textarea>
+<textarea name="q3" placeholder="Q.NO 3: நான் யார் என்று உங்களுக்கு தெரியுமா?" required></textarea>
 
-<button type="submit">Send with Love ❤️</button>
+<textarea name="q4" placeholder="Q.NO 4: Ennoda Birthday vara poguthu. Neenga thappa ninaichikalana, Chocolate 🍫 tharalama ungaluku??" required></textarea>
+
+<button type="submit">Submit 💗</button>
 </form>
 
-<div class="success-box" id="successBox">
-💗 Thank You… Your answers mean everything to me 💗  
-<br><br>  
-<span style="font-size:35px;">🌹 🌹 🌹</span>
-<br><br>
-I promise… I'll always value your feelings ❤️
+<div class="success-box" id="successMessage">
+  💗 Thank you 💗
 </div>
 
 <script>
-/* Rose petals generator */
-setInterval(() => {
-  let petal = document.createElement("div");
-  petal.innerHTML = "🌹";
-  petal.className = "petal";
-  petal.style.left = Math.random()*100+"vw";
-  petal.style.animationDuration = (Math.random()*3+4)+"s";
-  document.body.appendChild(petal);
-  setTimeout(()=>petal.remove(), 6000);
-},500);
+  // Floating hearts
+  setInterval(() => {
+    let h = document.createElement("div");
+    h.innerHTML = "💖";
+    h.className = "heart";
+    h.style.left = Math.random()*100 + "vw";
+    h.style.fontSize = (Math.random()*15 + 18) + "px";
+    document.body.appendChild(h);
+    setTimeout(()=>h.remove(),6000);
+  }, 350);
 
-/* Submit Form Without Redirect */
-document.getElementById("loveForm").addEventListener("submit", async function(e){
-  e.preventDefault();
-  let fd = new FormData(this);
+  // AJAX send form
+  document.getElementById("loveForm").addEventListener("submit", async function(e) {
+    e.preventDefault();
+    const fd = new FormData(this);
 
-  await fetch("https://formspree.io/f/YOUR_FORMSPREE_ID",{
-    method:"POST",
-    body:fd,
-    headers:{Accept:"application/json"}
+    await fetch("https://formspree.io/f/YOUR_FORMSPREE_ID", {
+      method: "POST",
+      body: fd,
+      headers: { "Accept": "application/json" }
+    });
+
+    this.style.display = "none";
+    document.getElementById("successMessage").style.display = "block";
   });
-
-  this.style.display="none";
-  document.getElementById("successBox").style.display="block";
-});
 </script>
 
 </body>
