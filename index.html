@@ -1,315 +1,175 @@
 <!DOCTYPE html>
 <html lang="ta">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Private</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>For You ❤️</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700;900&display=swap" rel="stylesheet">
+
 <style>
-  /* --- Basic / mobile-first layout --- */
-  :root{
-    --bg1:#ff2c6e; --bg2:#ff7aa6; --bg3:#ffbedc;
-    --glass: rgba(255,255,255,0.14);
-    --accent: #ff1670;
-    --white: #ffffff;
-  }
-  *{box-sizing:border-box}
-  html,body{height:100%}
-  body{
-    margin:0;
-    font-family: "Poppins", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
-    background: linear-gradient(135deg,var(--bg1),var(--bg2),var(--bg3));
-    -webkit-font-smoothing:antialiased;
-    -moz-osx-font-smoothing:grayscale;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    padding:18px;
-    color:var(--white);
+  body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Montserrat', sans-serif;
+    background: linear-gradient(145deg, #ff002e, #ff4b6e, #e60026);
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    overflow: hidden;
+    color: white;
   }
 
-  /* container */
-  .card{
-    width:100%;
-    max-width:520px;
-    background:var(--glass);
-    border-radius:16px;
-    padding:18px;
-    backdrop-filter: blur(10px) saturate(1.1);
-    box-shadow: 0 12px 40px rgba(0,0,0,0.22);
-    border: 1px solid rgba(255,255,255,0.12);
+  h2 {
+    font-weight: 900;
+    font-size: 30px;
+    margin-top: -20px;
+    animation: glow 2s infinite alternate ease-in-out;
   }
 
-  /* top: the two love sentences (exact as provided) */
-  .love-sentences{
-    color:var(--white);
-    font-weight:800;
-    font-size:18px;
-    line-height:1.45;
-    text-align:center;
-    margin:6px 0 14px 0;
-    text-shadow: 0 0 6px rgba(255,255,255,0.22);
+  @keyframes glow {
+    from { text-shadow: 0 0 12px #fff; }
+    to { text-shadow: 0 0 25px #ffb3c6, 0 0 40px #ff99af; }
   }
 
-  .love-sentences + .love-sentences{ margin-top:4px; }
-
-  /* form layout */
-  form{ width:100%; margin-top:6px; }
-  .qwrap{ margin-top:12px; }
-
-  /* question label uses EXACT question text — styled boldly white */
-  .qlabel{
-    display:block;
-    color:var(--white);
-    font-weight:800;
-    font-size:15px;
-    line-height:1.4;
-    margin-bottom:8px;
-    text-shadow: 0 0 6px rgba(0,0,0,0.12);
+  form {
+    width: 90%;
+    max-width: 480px;
+    margin-top: 10px;
   }
 
-  textarea{
-    width:100%;
-    min-height:56px;
-    padding:12px;
-    border-radius:10px;
-    border:none;
-    resize:vertical;
-    font-size:15px;
-    font-weight:600;
-    outline:none;
-    background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
-    color:var(--white);
-    box-shadow: inset 0 1px 0 rgba(255,255,255,0.02);
+  textarea {
+    width: 100%;
+    padding: 14px;
+    border-radius: 15px;
+    border: none;
+    outline: none;
+    font-size: 14px;
+    margin-bottom: 12px;
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+    font-weight: 500;
+    resize: none;
+    backdrop-filter: blur(7px);
+    
+    animation: floatIn 0.9s ease forwards, pulseBox 3s infinite ease-in-out alternate;
+    opacity: 0;
   }
 
-  /* submit */
-  .actions{ margin-top:14px; display:flex; gap:12px; align-items:center; }
-  button[type="submit"]{
-    flex:1;
-    background:var(--white);
-    color:var(--accent);
-    border:none;
-    padding:12px 14px;
-    border-radius:12px;
-    font-weight:800;
-    font-size:15px;
-    cursor:pointer;
-    box-shadow: 0 8px 18px rgba(0,0,0,0.18);
-  }
-  button[type="submit"]:active{ transform:scale(.98) }
-
-  /* small play/pause circle (no extra text) */
-  .audio-button{
-    width:46px; height:46px; border-radius:50%;
-    background: rgba(255,255,255,0.12);
-    display:inline-grid; place-items:center;
-    border:1px solid rgba(255,255,255,0.06);
-    cursor:pointer;
-    box-shadow: 0 6px 16px rgba(0,0,0,0.18);
-  }
-  .audio-button svg{ width:20px; height:20px; fill:var(--white); }
-
-  /* success animation (inline) */
-  .success {
-    display:none;
-    margin-top:14px;
-    text-align:center;
-    font-weight:800;
-    font-size:18px;
-    color:var(--white);
-    animation: successPop .9s ease both;
-  }
-  @keyframes successPop {
-    0%{ transform: scale(.85); opacity: 0; }
-    60%{ transform: scale(1.06); opacity: 1; }
-    100%{ transform: scale(1); opacity: 1; }
+  textarea::placeholder {
+    color: rgba(255,255,255,0.9);
   }
 
-  /* floating hearts; minimal for mobile performance */
-  .floating-heart{
-    position:fixed;
-    bottom:-10px;
-    pointer-events:none;
-    animation: rise 6s linear infinite;
-    opacity:.9;
-    transform-origin:center;
-  }
-  @keyframes rise {
-    0%{ transform: translateY(0) scale(.7) rotate(0deg); opacity:1; }
-    100%{ transform: translateY(-120vh) scale(1.1) rotate(300deg); opacity:0; }
+  @keyframes floatIn {
+    from { transform: translateY(30px) scale(.95); opacity: 0; }
+    to { transform: translateY(0) scale(1); opacity: 1; }
   }
 
-  /* accessibility / small screens */
-  @media (max-width:420px){
-    .love-sentences{ font-size:17px; }
-    .qlabel{ font-size:14px; }
-    button[type="submit"]{ font-size:15px; padding:11px; }
+  @keyframes pulseBox {
+    0% { box-shadow: 0 0 8px rgba(255,255,255,0.4); }
+    100% { box-shadow: 0 0 18px rgba(255,255,255,0.8); }
+  }
+
+  button {
+    background: white;
+    color: #d1002f;
+    font-weight: 900;
+    width: 100%;
+    padding: 13px;
+    border-radius: 30px;
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
+    transition: .25s;
+  }
+
+  button:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 20px white;
+  }
+
+  .heart {
+    position: fixed;
+    color: white;
+    font-size: 18px;
+    animation: floatUp 6s linear infinite;
+    opacity: 0.8;
+    bottom: -10px;
+  }
+
+  @keyframes floatUp {
+    0% { transform: translateY(0); opacity: 1; }
+    100% { transform: translateY(-110vh) rotate(360deg); opacity: 0; }
+  }
+
+  .thanks {
+    display: none;
+    font-size: 21px;
+    font-weight: 700;
+    animation: fadeIn .8s ease forwards;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: scale(.7); }
+    to { opacity: 1; transform: scale(1); }
   }
 </style>
 </head>
+
 <body>
 
-<div class="card" role="main" aria-labelledby="form-title">
-  <!-- EXACT two love sentences from you (no extras added) -->
-  <div class="love-sentences">நான் அதிக அக்கறை கொண்ட, <br>ஒரே பெண் நீ மட்டும் தான்!</div>
+<h2>❤️ For You ❤️</h2>
 
-  <div class="love-sentences">பார்ப்பதற்கு மட்டும் அழகாய் இருக்கும் பெண்களுக்கு <br>மத்தியில், நினைப்பதற்க்கே அழகானவள் அவள்!</div>
+<form id="loveForm">
 
-  <!-- Form (questions: EXACT as provided) -->
-  <form id="loveForm">
-    <div class="qwrap">
-      <label class="qlabel">Q.NO 1:  Yen mela Ungaluku Kovama? Yenmela ethum thappu iruntha enna manuchirunga🙏</label>
-      <textarea name="Q1" required placeholder=""></textarea>
-    </div>
+<textarea name="q1" rows="2" placeholder="Q.NO 1:  Yen mela Ungaluku Kovama? Yenmela ethum thappu iruntha enna manuchirunga🙏" required></textarea>
 
-    <div class="qwrap">
-      <label class="qlabel">Q.No 2: 
-
+<textarea name="q2" rows="4" placeholder="Q.No 2: 
 ✨என் குறுஞ்செய்திகளுக்கு மட்டும் தயவுசெய்து
 அன்பு காட்டு🙏,
 பாவம் அவைகள்
 உன் முகவரி மட்டுமே
-அறிந்தவைகள்💯🙌</label>
-      <textarea name="Q2" required placeholder=""></textarea>
-    </div>
+அறிந்தவைகள்💯🙌" required></textarea>
 
-    <div class="qwrap">
-      <label class="qlabel">Q.NO 3: நான் யார் என்று உங்களுக்கு தெரியுமா?</label>
-      <textarea name="Q3" required placeholder=""></textarea>
-    </div>
+<textarea name="q3" rows="2" placeholder="Q.NO 3: நான் யார் என்று உங்களுக்கு தெரியுமா?" required></textarea>
 
-    <div class="qwrap">
-      <label class="qlabel">Q.NO 4: Ennoda Birthday vara poguthu. Neenga thappa ninaichikalana, Chocolate 🍫 tharalama ungaluku??</label>
-      <textarea name="Q4" required placeholder=""></textarea>
-    </div>
+<textarea name="q4" rows="2" placeholder="Q.NO 4: Ennoda Birthday vara poguthu. Neenga thappa ninaichikalana, Chocolate 🍫 tharalama ungaluku??" required></textarea>
 
-    <div class="actions">
-      <!-- play/pause circle (no extra text) -->
-      <div class="audio-button" id="audioBtn" aria-label="Play/Pause">
-        <!-- play icon (svg); toggled to pause dynamically -->
-        <svg id="audioIcon" viewBox="0 0 24 24" aria-hidden="true">
-          <path d="M8 5v14l11-7z"></path>
-        </svg>
-      </div>
+<button type="submit">Send ❤️</button>
+</form>
 
-      <button type="submit" aria-label="Submit">Submit</button>
-    </div>
-
-    <div class="success" id="success">💗</div>
-  </form>
-</div>
-
-<!-- floating hearts (lightweight) -->
-<script>
-  // create a few floating hearts (limited to keep mobile smooth)
-  for (let i=0;i<8;i++){
-    const fh = document.createElement('div');
-    fh.className = 'floating-heart';
-    fh.style.left = (6 + Math.random()*88) + 'vw';
-    fh.style.fontSize = (16 + Math.random()*20) + 'px';
-    fh.style.animationDuration = (4 + Math.random()*6) + 's';
-    fh.innerText = '💖';
-    document.body.appendChild(fh);
-    // remove occasional hearts after long time to avoid buildup
-    setTimeout(()=>{ try{ fh.remove() }catch(e){} }, 16000);
-  }
-</script>
-
-<!-- audio (Pixabay - direct mp3 file). User must tap play on mobile; button toggles play/pause -->
-<audio id="bgAudio" preload="auto">
-  <source src="https://cdn.pixabay.com/download/audio/2022/12/13/audio_52c9a7e520.mp3?filename=nostalgic-romantic-piano-music-412723.mp3" type="audio/mpeg">
-</audio>
+<div class="thanks">💖 Thank you... your answers mean a lot to me 💖</div>
 
 <script>
-  // audio toggle
-  const audio = document.getElementById('bgAudio');
-  const audioBtn = document.getElementById('audioBtn');
-  const audioIcon = document.getElementById('audioIcon');
-  let playing = false;
+// floating hearts
+setInterval(() => {
+  let h = document.createElement("div");
+  h.innerHTML = "❤️";
+  h.className = "heart";
+  h.style.left = Math.random() * 100 + "vw";
+  h.style.fontSize = (Math.random()*24+16) + "px";
+  document.body.appendChild(h);
+  setTimeout(()=>h.remove(), 5000);
+}, 350);
 
-  // try to play once (browsers may block until user gesture)
-  (async ()=> {
-    try { await audio.play(); playing = true; setIconPause(); } catch(e) { /* blocked */ }
-  })();
-
-  function setIconPause(){
-    audioIcon.innerHTML = '<path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"></path>';
-  }
-  function setIconPlay(){
-    audioIcon.innerHTML = '<path d="M8 5v14l11-7z"></path>';
-  }
-
-  audioBtn.addEventListener('click', async () => {
-    try{
-      if (!playing){
-        await audio.play();
-        playing = true;
-        setIconPause();
-      } else {
-        audio.pause();
-        playing = false;
-        setIconPlay();
-      }
-    }catch(e){
-      // no-op
-    }
+// Form submit (AJAX)
+document.getElementById("loveForm").addEventListener("submit", async function(e){
+  e.preventDefault();
+  
+  const data = new FormData(this);
+  await fetch("https://formspree.io/f/YOUR_FORMSPREE_ID", {
+    method: "POST",
+    body: data,
+    headers: { "Accept": "application/json" }
   });
 
-  // Form submission via AJAX (Formspree). Replace YOUR_FORMSPREE_ID
-  const form = document.getElementById('loveForm');
-  const success = document.getElementById('success');
-
-  form.addEventListener('submit', async (ev) => {
-    ev.preventDefault();
-
-    const data = new FormData(form);
-
-    // disable submit to prevent double sends
-    const submitBtn = form.querySelector('button[type="submit"]');
-    submitBtn.disabled = true;
-    submitBtn.style.opacity = '0.6';
-
-    try {
-      await fetch('https://formspree.io/f/YOUR_FORMSPREE_ID', {
-        method: 'POST',
-        body: data,
-        headers: { 'Accept': 'application/json' }
-      });
-    } catch(err){ /* still continue to success UI */ }
-
-    // Show inline success animation (no redirect)
-    success.style.display = 'block';
-    success.innerText = '💗';
-    // simple burst animation: create hearts
-    for (let i=0;i<12;i++){
-      const d = document.createElement('div');
-      d.style.position='fixed';
-      d.style.left = (50 + (Math.random()*160 - 80)) + 'vw';
-      d.style.top  = (50 + (Math.random()*160 - 90)) + 'vh';
-      d.style.fontSize = (12 + Math.random()*28) + 'px';
-      d.style.pointerEvents = 'none';
-      d.innerText = '💖';
-      d.style.transform = 'translate(-50%,-50%) scale(0.2)';
-      d.style.opacity = '0';
-      d.style.transition = 'transform 700ms cubic-bezier(.2,.9,.2,1), opacity 700ms';
-      document.body.appendChild(d);
-      // animate
-      requestAnimationFrame(()=> {
-        d.style.transform = 'translate(-50%,-50%) scale(1.1)';
-        d.style.opacity = '1';
-      });
-      setTimeout(()=> {
-        d.style.transform = 'translate(-50%,-50%) scale(.6)';
-        d.style.opacity = '0';
-      }, 700);
-      setTimeout(()=> d.remove(), 1400);
-    }
-
-    // hide form fields, keep card visible
-    form.style.transition = 'opacity 400ms';
-    form.style.opacity = '0';
-    setTimeout(()=> form.remove(), 600);
-  });
+  this.style.display = "none";
+  document.querySelector(".thanks").style.display = "block";
+});
 </script>
+
 </body>
 </html>
