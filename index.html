@@ -9,18 +9,18 @@
 
 <style>
   :root{
-    --accent1: #ff477e;
-    --accent2: #ff1e56;
-    --card-bg: rgba(255,255,255,0.10); /* semi-opaque */
-    --input-bg: rgba(255,255,255,0.08); /* less white for answers */
-    --glass-border: rgba(255,255,255,0.22);
+    --accent-a: #ff1a2d;
+    --accent-b: #e60026;
+    --card-bg: rgba(255,255,255,0.08);
+    --input-bg: rgba(255,255,255,0.06);
+    --glass-border: rgba(255,255,255,0.18);
   }
 
   *{box-sizing:border-box}
   body{
     margin:0;
     font-family:'Montserrat',sans-serif;
-    background: linear-gradient(135deg,var(--accent1),var(--accent2));
+    background: linear-gradient(135deg,var(--accent-a),var(--accent-b));
     color: #fff;
     -webkit-font-smoothing:antialiased;
     -moz-osx-font-smoothing:grayscale;
@@ -34,12 +34,12 @@
 
   .wrap{
     width:100%;
-    max-width:520px;
+    max-width:560px;
   }
 
   header{
     text-align:center;
-    margin-bottom:14px;
+    margin-bottom:12px;
   }
 
   h1{
@@ -48,15 +48,7 @@
     font-weight:900;
     letter-spacing:0.2px;
     line-height:1.05;
-    text-shadow:0 6px 24px rgba(0,0,0,0.12);
-  }
-
-  p.lead{
-    margin:0 0 14px;
-    color:rgba(255,255,255,0.95);
-    font-weight:600;
-    font-size:14px;
-    opacity:0.95;
+    text-shadow:0 6px 18px rgba(0,0,0,0.12);
   }
 
   form{
@@ -65,7 +57,6 @@
     gap:12px;
   }
 
-  /* each question card holds question text + answer box */
   .card{
     background: var(--card-bg);
     border: 1px solid var(--glass-border);
@@ -75,7 +66,7 @@
     display:flex;
     flex-direction:column;
     gap:10px;
-    animation:cardIn .5s ease;
+    animation:cardIn .45s ease;
   }
 
   @keyframes cardIn{
@@ -88,14 +79,14 @@
     font-weight:700;
     color:#fff;
     text-align:left;
-    line-height:1.3;
-    white-space:pre-line; /* keep line breaks when present */
+    line-height:1.35;
+    white-space:pre-line;
   }
 
   .answer{
     background: var(--input-bg);
     border-radius:10px;
-    border:1px solid rgba(255,255,255,0.06);
+    border:1px solid rgba(255,255,255,0.04);
     padding:12px;
     color:#fff;
     font-size:15px;
@@ -108,7 +99,7 @@
   }
 
   .answer:focus{
-    box-shadow: 0 6px 28px rgba(255,255,255,0.06), 0 0 18px rgba(255,200,220,0.12);
+    box-shadow: 0 8px 30px rgba(255,200,220,0.06), 0 0 16px rgba(255,200,220,0.12);
     transform: translateY(-2px);
   }
 
@@ -121,7 +112,7 @@
   .btn{
     flex:1;
     background:#fff;
-    color:var(--accent2);
+    color:var(--accent-b);
     font-weight:900;
     border:none;
     padding:12px;
@@ -135,20 +126,50 @@
   .btn:active{ transform: scale(.99) }
   .btn:hover{ box-shadow: 0 12px 36px rgba(0,0,0,0.18) }
 
-  .thanks{
+  /* centered full-screen thank you overlay */
+  .thanks-overlay{
+    position:fixed;
+    inset:0;
     display:none;
-    margin-top:14px;
-    text-align:center;
-    font-weight:800;
-    font-size:18px;
-    padding:12px;
-    border-radius:12px;
-    background: linear-gradient(90deg, rgba(255,255,255,0.06), rgba(255,255,255,0.04));
-    border:1px solid rgba(255,255,255,0.08);
-    box-shadow: 0 10px 30px rgba(0,0,0,0.12);
+    justify-content:center;
+    align-items:center;
+    background: linear-gradient(180deg, rgba(0,0,0,0.25), rgba(0,0,0,0.35));
+    z-index:9999;
+    padding:20px;
   }
 
-  /* floating hearts (subtle) */
+  .thanks-card{
+    width:100%;
+    max-width:420px;
+    background: linear-gradient(135deg, rgba(255,255,255,0.06), rgba(255,255,255,0.03));
+    border-radius:16px;
+    border:1px solid rgba(255,255,255,0.12);
+    padding:22px;
+    text-align:center;
+    color:white;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.45);
+    transform: scale(.8);
+    opacity:0;
+    animation:thanksPop .7s cubic-bezier(.2,.9,.3,1) forwards;
+  }
+
+  @keyframes thanksPop {
+    to { transform: scale(1); opacity:1; }
+  }
+
+  .thanks-card h2{
+    margin:0 0 8px 0;
+    font-size:24px;
+    font-weight:900;
+  }
+
+  .thanks-card p{
+    margin:0;
+    font-weight:600;
+    opacity:0.95;
+  }
+
+  /* subtle floating hearts */
   .heart{
     position:fixed;
     bottom:-20px;
@@ -163,11 +184,12 @@
     100%{ transform: translateY(-110vh) rotate(360deg); opacity:0 }
   }
 
-  /* small screens */
+  /* responsive tweaks */
   @media (max-width:420px){
     h1{ font-size:22px }
     .answer{ min-height:64px; font-size:15px }
     .btn{ font-size:15px; padding:11px }
+    .thanks-card{ padding:18px }
   }
 </style>
 </head>
@@ -176,10 +198,9 @@
 <div class="wrap">
   <header>
     <h1>My Questions for N</h1>
-    <p class="lead">Please answer these for me —I'll be grateful 🙏</p>
   </header>
 
-  <form id="loveForm">
+  <form id="loveForm" autocomplete="off">
     <div class="card">
       <div class="question">Q.NO 1:  Yen mela Ungaluku Kovama? Yenmela ethum thappu iruntha enna manuchirunga🙏</div>
       <textarea class="answer" name="q1" required></textarea>
@@ -203,42 +224,58 @@
     <div class="actions">
       <button type="submit" class="btn">Send ❤️</button>
     </div>
-
-    <div class="thanks" id="thanksBox">💖 Thank you — your answers mean the world to me 💖</div>
   </form>
 </div>
 
+<!-- centered thank-you overlay -->
+<div class="thanks-overlay" id="thanksOverlay" aria-hidden="true">
+  <div class="thanks-card" role="dialog" aria-live="polite">
+    <h2>💖 Thank you 💖</h2>
+    <p>Your answers mean the world to me</p>
+  </div>
+</div>
+
 <script>
-  // subtle floating hearts
+  // floating hearts (subtle ephemeral)
   const HEART_COUNT = 18;
-  for(let i=0;i<HEART_COUNT;i++){
+  for (let i = 0; i < HEART_COUNT; i++) {
     const d = document.createElement('div');
     d.className = 'heart';
     d.innerText = '❤️';
-    d.style.left = Math.random()*100 + 'vw';
-    d.style.fontSize = (14 + Math.random()*20) + 'px';
-    d.style.setProperty('--dur', (4 + Math.random()*6) + 's');
+    d.style.left = Math.random() * 100 + 'vw';
+    d.style.fontSize = (14 + Math.random() * 20) + 'px';
+    d.style.setProperty('--dur', (4 + Math.random() * 6) + 's');
     document.body.appendChild(d);
-    setTimeout(()=>{ d.remove() }, 10000 + Math.random()*4000);
+    // remove after 10-14s so DOM stays clean
+    setTimeout(() => { d.remove(); }, 10000 + Math.random() * 4000);
   }
 
-  // AJAX submit to Formspree
-  document.getElementById('loveForm').addEventListener('submit', async function(e){
+  // AJAX submit to Formspree (no redirect)
+  document.getElementById('loveForm').addEventListener('submit', async function (e) {
     e.preventDefault();
     const form = e.target;
     const data = new FormData(form);
 
-    try{
+    try {
       await fetch('https://formspree.io/f/YOUR_FORMSPREE_ID', {
         method: 'POST',
         body: data,
         headers: { 'Accept': 'application/json' }
       });
+
+      // show centered overlay thank you
+      const overlay = document.getElementById('thanksOverlay');
+      overlay.style.display = 'flex';
+      overlay.setAttribute('aria-hidden', 'false');
+
+      // optionally clear inputs (keeps them private on device)
+      form.querySelectorAll('textarea').forEach(t => t.value = '');
+
+      // hide the form (keeps space behind for overlay)
       form.style.display = 'none';
-      document.getElementById('thanksBox').style.display = 'block';
-    }catch(err){
-      alert('Something went wrong — try again.');
+    } catch (err) {
       console.error(err);
+      alert('Something went wrong — please try again.');
     }
   });
 </script>
