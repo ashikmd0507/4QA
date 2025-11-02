@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="ta">
+<head>
+<meta charset="UTF-8">
+<title>💗 A Secret Message for You 💗</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Great+Vibes&display=swap');
+
+body {
+    margin: 0;
+    font-family: "Poppins", sans-serif;
+    background: linear-gradient(135deg, #ff0055, #ff6a88, #ffd1dc);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+/* Floating Hearts Background */
+.heart {
+    position: absolute;
+    animation: floatUp 8s linear infinite;
+    opacity: 0.7;
+}
+@keyframes floatUp {
+    0% { transform: translateY(100vh) scale(0.7); }
+    100% { transform: translateY(-10vh) scale(1.2); }
+}
+
+/* Sparkle effect */
+.sparkle {
+    position: absolute;
+    width: 6px; height: 6px;
+    background: white;
+    border-radius: 50%;
+    box-shadow: 0 0 10px white;
+    animation: sparkleMove 4s infinite linear;
+}
+@keyframes sparkleMove {
+    from { opacity: 0; transform: translateY(0) scale(0.3); }
+    to { opacity: 1; transform: translateY(-100px) scale(1); }
+}
+
+/* Main glass container */
+.container {
+    background: rgba(255,255,255,0.18);
+    backdrop-filter: blur(12px);
+    padding: 25px;
+    border-radius: 20px;
+    width: 85%;
+    max-width: 480px;
+    text-align: center;
+    animation: fadeIn 2.5s ease;
+    color: white;
+    border: 2px solid rgba(255,255,255,0.5);
+}
+@keyframes fadeIn {
+    from { opacity: 0; transform: scale(0.8) translateY(40px); }
+    to { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+h1 {
+    font-family: "Great Vibes", cursive;
+    font-size: 38px;
+    margin-bottom: 8px;
+    animation: glowPulse 3s infinite ease-in-out;
+}
+@keyframes glowPulse {
+    0%, 100% { text-shadow: 0 0 10px #fff, 0 0 25px pink; }
+    50%       { text-shadow: 0 0 20px #fff, 0 0 40px hotpink; }
+}
+
+.question {
+    font-weight: 600;
+    text-align: left;
+    margin-top: 18px;
+    opacity: 0;
+    animation: fadeQuestion 1.4s forwards;
+}
+.question:nth-child(1){ animation-delay: .6s; }
+.question:nth-child(3){ animation-delay: 1.2s; }
+.question:nth-child(5){ animation-delay: 1.8s; }
+.question:nth-child(7){ animation-delay: 2.4s; }
+
+@keyframes fadeQuestion {
+    from { opacity: 0; transform: translateX(-20px); }
+    to   { opacity: 1; transform: translateX(0); }
+}
+
+textarea {
+    width: 100%;
+    padding: 10px;
+    margin-top: 6px;
+    border-radius: 12px;
+    border: none;
+    font-weight: 600;
+    resize: none;
+    transition: .3s;
+}
+textarea:focus {
+    outline: 3px solid #ffadd6;
+    box-shadow: 0 0 10px pink;
+}
+
+/* Button */
+button {
+    margin-top: 25px;
+    width: 100%;
+    padding: 14px;
+    border-radius: 14px;
+    border: none;
+    font-weight: 700;
+    cursor: pointer;
+    font-size: 18px;
+    background: white;
+    color: #ff0055;
+    animation: heartbeat 1.6s infinite;
+}
+@keyframes heartbeat {
+    0%, 100%{ transform: scale(1); }
+    50%     { transform: scale(1.06); }
+}
+button:hover {
+    background: #ffe4ea;
+}
+</style>
+</head>
+
+<body>
+
+<!-- Background Hearts -->
+<script>
+for (let i = 0; i < 20; i++) {
+  let h = document.createElement("div");
+  h.innerHTML = "💗";
+  h.className = "heart";
+  h.style.left = Math.random()*100 + "vw";
+  h.style.animationDuration = 5 + Math.random()*7 + "s";
+  h.style.fontSize = 18 + Math.random()*28 + "px";
+  document.body.appendChild(h);
+}
+for (let i = 0; i < 15; i++) {
+  let s = document.createElement("div");
+  s.className = "sparkle";
+  s.style.left = Math.random()*100 + "vw";
+  s.style.top = Math.random()*100 + "vh";
+  s.style.animationDelay = Math.random()*4 + "s";
+  document.body.appendChild(s);
+}
+</script>
+
+<!-- Background Music -->
+<audio autoplay loop hidden>
+  <source src="https://files.catbox.moe/2m6l8u.mp3" type="audio/mpeg">
+</audio>
+
+<div class="container">
+    <h1>💞 கேள்விகள் 💞</h1>
+
+<form action="https://formspree.io/f/mblpwdpd" method="POST">
+
+<div class="question">1) Yenmela Ungaluku Kovama? Yenmela ethum thappu iruntha enna manuchirunga🙏</div>
+<textarea name="Q1 Answer" rows="2" required></textarea>
+
+<div class="question">2) ✨ என் குறுஞ்செய்திகளுக்கு மட்டும் அன்பு காட்டு🙏 பாவம் அவைகள் உன் முகவரி மட்டுமே அறிந்தவை 💯🙌</div>
+<textarea name="Q2 Answer" rows="2" required></textarea>
+
+<div class="question">3) நான் யார் என்று உங்களுக்கு தெரியும் என்கிறீர்களா?</div>
+<textarea name="Q3 Answer" rows="2" required></textarea>
+
+<div class="question">4) என் Birthday வருது 🥺 Chocolate 🍫 tharalama ungaluku?</div>
+<textarea name="Q4 Answer" rows="2" required></textarea>
+
+<button type="submit">அனுப்பு 💌</button>
+</form>
+</div>
+
+</body>
+</html>
